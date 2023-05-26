@@ -3,7 +3,7 @@
                                        non-blank-string?]]))
 
 (def path-param
-  [:map [:id (nanoid? 12)]])
+  [:map [:todo-list-id (nanoid? 12)]])
 
 (def create-body
   [:map

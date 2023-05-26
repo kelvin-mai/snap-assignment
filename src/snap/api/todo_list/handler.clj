@@ -1,6 +1,8 @@
 (ns snap.api.todo-list.handler
   (:require [snap.api.todo-list.db :as todo-list.db]
             [snap.api.todo-list.schema :as todo-list.schema]
+            [snap.api.todo-item.schema :as todo-item.schema]
+            [snap.api.todo-item.handler :as todo-item.handler]
             [snap.routing.response :refer [ok created]]
             [snap.routing.exception :refer [not-found]]))
 
@@ -18,7 +20,7 @@
 
 (defn get-todo-list-by-id
   [{:keys [db parameters] :as request}]
-  (let [id (get-in parameters [:path :id])
+  (let [id (get-in parameters [:path :todo-list-id])
         todo-list (todo-list.db/get-by-id db id)]
     (if todo-list
       (ok todo-list)
@@ -26,7 +28,7 @@
 
 (defn delete-todo-list
   [{:keys [db parameters] :as request}]
-  (let [id (get-in parameters [:path :id])
+  (let [id (get-in parameters [:path :todo-list-id])
         response (todo-list.db/delete-by-id db id)]
     (if response
       (ok response)
@@ -37,6 +39,8 @@
    ["" {:get get-all-todo-lists
         :post {:parameters {:body todo-list.schema/create-body}
                :handler create-todo-list}}]
-   ["/:id" {:parameters {:path todo-list.schema/path-param}
-            :get get-todo-list-by-id
-            :delete delete-todo-list}]])
+   ["/:todo-list-id" {:parameters {:path todo-list.schema/path-param}
+                      :get get-todo-list-by-id
+                      :delete delete-todo-list
+                      :post {:parameters {:body todo-item.schema/create-body}
+                             :handler todo-item.handler/create-todo-item}}]])
