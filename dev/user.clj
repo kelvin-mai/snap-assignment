@@ -7,11 +7,15 @@
 
 (tools-ns/set-refresh-dirs "dev" "src")
 
+(declare db)
+
 (ig-repl/set-prep!
  (fn [] (read-config :dev)))
 
 (defn start-interactive []
   (go)
+  (def db (:postgres/db state/system))
+  (def router (:reitit/router state/system))
   :ready!)
 
 (defn restart []

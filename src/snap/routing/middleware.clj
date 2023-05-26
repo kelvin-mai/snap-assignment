@@ -1,6 +1,8 @@
 (ns snap.routing.middleware
   (:require [reitit.ring.middleware.muuntaja :as muuntaja]
-            [reitit.ring.coercion :as rcc]))
+            [reitit.ring.middleware.parameters :as parameters]
+            [reitit.ring.coercion :as rcc]
+            [snap.routing.exception :as exception]))
 
 (def wrap-env
   {:name ::env
@@ -11,8 +13,9 @@
          (handler (merge request env)))))})
 
 (def global-middlewares
-  [muuntaja/format-middleware
-   rcc/coerce-exceptions-middleware
+  [parameters/parameters-middleware
+   muuntaja/format-middleware
+   exception/exception-middleware
    rcc/coerce-request-middleware
    rcc/coerce-response-middleware
    wrap-env])

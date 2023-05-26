@@ -3,6 +3,7 @@
             [taoensso.timbre :as log]
             [muuntaja.core :as m]
             [reitit.ring :as ring]
+            [reitit.coercion.malli :as malli]
 
             [snap.routing.middleware :as mw]
             [snap.api.routes :refer [api-routes]]))
@@ -14,6 +15,7 @@
    (ring/router
     api-routes
     {:data {:env {:db db}
+            :coercion malli/coercion
             :muuntaja m/instance
             :middleware mw/global-middlewares}})
    (ring/routes
