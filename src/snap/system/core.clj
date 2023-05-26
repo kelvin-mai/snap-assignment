@@ -1,6 +1,8 @@
 (ns snap.system.core
   (:require [aero.core :as aero]
-            [integrant.core :as ig]))
+            [taoensso.timbre :as log]
+            [integrant.core :as ig]
+            snap.system.db))
 
 (defmethod aero/reader 'ig/ref
   [_ _ value]
@@ -8,7 +10,7 @@
 
 (defmethod ig/init-key :system/config
   [_ config]
-  (println "system starting with config" config)
+  (log/info "system starting with config" config)
   config)
 
 (defn read-config
