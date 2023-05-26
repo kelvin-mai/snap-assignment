@@ -2,7 +2,9 @@
   (:require [aero.core :as aero]
             [taoensso.timbre :as log]
             [integrant.core :as ig]
-            snap.system.db))
+            snap.system.db
+            snap.system.router
+            snap.system.server))
 
 (defmethod aero/reader 'ig/ref
   [_ _ value]

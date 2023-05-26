@@ -1,7 +1,6 @@
 (ns user
   (:require [clojure.tools.namespace.repl :as tools-ns]
             [nrepl.server]
-            [cider.nrepl :refer [cider-nrepl-handler]]
             [integrant.repl :as ig-repl :refer [go halt]]
             [integrant.repl.state :as state]
             [snap.system.core :refer [read-config]]))
