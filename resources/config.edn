@@ -1,9 +1,12 @@
 {:system/config {:db {:adapter "postgresql"
                       :server-name #or [#env POSTGRES_HOST "localhost"]
-                      :database-name #or [#env POSTGRES_DB "snap_db"]
+                      :database-name #profile {:default #or [#env POSTGRES_DB "snap_db"]
+                                               :test "test_db"}
                       :username #or [#env POSTGRES_USER "postgres"]
-                      :password #or [#env POSTGRES_PASSWORD "postgres"]}}
+                      :password #or [#env POSTGRES_PASSWORD "postgres"]}
+                 :port #profile {:default #or [#env PORT 8080]
+                                 :test 8081}}
  :postgres/db {:config #ig/ref :system/config}
  :reitit/routes {:db #ig/ref :postgres/db}
  :http/server {:router #ig/ref :reitit/routes
-               :port #or [#env PORT 8080]}}
+               :config #ig/ref :system/config}}

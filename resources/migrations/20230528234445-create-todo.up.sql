@@ -3,7 +3,7 @@ create table if not exists todo_list (
   name text not null,
   created timestamp default now()
 );
-
+--;;
 create table if not exists todo_item (
   id char(12) not null primary key default nanoid(12),
   todo_list_id char(12) not null,

@@ -4,9 +4,10 @@
             [org.httpkit.server :as http]))
 
 (defmethod ig/init-key :http/server
-  [_ {:keys [router port]}]
-  (log/info "server started on port" port)
-  (http/run-server router {:port port}))
+  [_ {:keys [router config]}]
+  (let [port (:port config)]
+    (log/info "server started on port" port)
+    (http/run-server router {:port port})))
 
 (defmethod ig/halt-key! :http/server
   [_ server]
