@@ -9,7 +9,7 @@
                   :body {:ping "pong"}})}])
 
 (def api-routes
-  [["/api"
-    health-route
-    todo-list/routes
-    todo-item/routes]])
+  ["/api"
+   health-route
+   todo-list/routes
+   todo-item/routes])
