@@ -4,7 +4,7 @@
 
 (def test-system (atom nil))
 
-(def use-system []
+(defn use-system []
   (fn [test-fn]
     (reset! test-system
             (let [config (system/read-config :test)]
