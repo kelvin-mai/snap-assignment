@@ -45,9 +45,6 @@
 
 (def routes
   ["/todo-item"
-   #_["" {:get get-all-by-todo-list-id
-          :post {:parameters {:body todo-item.schema/create-body}
-                 :handler create-todo-item}}]
    ["/:todo-item-id" {:parameters {:path todo-item.schema/path-param}
                       :get get-todo-item
                       :delete delete-todo-item

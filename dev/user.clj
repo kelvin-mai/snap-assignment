@@ -15,7 +15,7 @@
 (defn start-interactive []
   (go)
   (def db (:postgres/db state/system))
-  (def router (:reitit/router state/system))
+  (def router (:reitit/routes state/system))
   :ready!)
 
 (defn restart []
