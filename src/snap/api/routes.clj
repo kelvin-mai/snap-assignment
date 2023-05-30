@@ -1,6 +1,7 @@
 (ns snap.api.routes
   (:require [snap.api.todo-list.handler :as todo-list]
-            [snap.api.todo-item.handler :as todo-item]))
+            [snap.api.todo-item.handler :as todo-item]
+            [snap.api.product.handler :as product]))
 
 (def health-route
   ["/health-check"
@@ -12,4 +13,5 @@
   ["/api"
    health-route
    todo-list/routes
-   todo-item/routes])
+   todo-item/routes
+   product/routes])

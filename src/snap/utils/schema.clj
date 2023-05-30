@@ -16,3 +16,10 @@
    {:type :non-blank-string
     :pred #(and (string? %)
                 (not (s/blank? %)))}))
+
+(def currency?
+  (m/-simple-schema
+   {:type :currency
+    :pred #(and (double? %)
+                ;; TODO: add boolean for only 2 decimal places
+                (pos? %))}))
