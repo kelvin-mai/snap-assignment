@@ -34,8 +34,6 @@
             (is (= (:product/quantity updated-product) 10))
             (is (= (:product/price updated-product) 12.5))))
 
-        (testing "can update new product")
-
         (testing "can delete new product"
           (let [response (request router :delete uri)]
             (is (= (:success response) true))))))))
