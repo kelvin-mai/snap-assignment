@@ -40,6 +40,7 @@
     ::coercion/request-coercion (handle-coercion-exception 400 "Malformed request")
     ::coercion/response-coercion (handle-coercion-exception 500 "Malformed response")
     java.sql.SQLException (handle-exception 500 "Database exception")
+    clojure.lang.ExceptionInfo (handle-exception 409 "Conflict")
     ::exception/wrap (fn [handler e request]
                        (log/error e (:uri request))
                        (handler e request))}))

@@ -2,7 +2,9 @@
   (:require [clojure.test :refer :all]
             [snap.test-utils :refer [use-system
                                      test-system
-                                     request]]))
+                                     request]]
+            [snap.product.route-utils :refer [create-product-fn
+                                              delete-product-fn]]))
 
 (use-fixtures :once (use-system))
 
@@ -40,14 +42,8 @@
 
 (deftest product-types-test
   (let [{router :reitit/routes} @test-system
-        create-product (fn [data]
-                         (-> (request router
-                                      :post "/api/product"
-                                      {:body-params data})
-                             :data))
-        delete-product (fn [id]
-                         (-> (request router
-                                      :delete (str "/api/product/" id))))
+        create-product (create-product-fn router)
+        delete-product (delete-product-fn router)
         free-product (create-product {:name "free"
                                       :quantity 10})
         empty-product (create-product {:name "empty"
