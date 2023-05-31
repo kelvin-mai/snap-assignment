@@ -1,5 +1,7 @@
 (ns snap.core
-  (:require [snap.system.core :refer [read-config]]))
+  (:require [integrant.core :as ig]
+            [snap.system.core :refer [read-config]]))
 
 (defn -main []
-  (read-config))
+  (let [config (read-config)]
+    (ig/init config)))
